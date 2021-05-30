@@ -1,0 +1,6 @@
+POST http://localhost:3001/api/listings
+content-type: application/json
+
+{
+    "module": "CG1112"
+}
