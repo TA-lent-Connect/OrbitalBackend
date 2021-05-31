@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+require('dotenv').config()
+const Listing = require('./models/listing')
 
 app.use(express.static('build'))
 app.use(cors())
@@ -16,64 +18,37 @@ const requestLogger = (request, response, next) => {
 
 app.use(requestLogger)
 
-let listings = [
-  {
-    id: 1,
-    module: "CS1010X"
-  },
-  {
-    id: 2,
-    module: "CS2040C"
-  },
-  {
-    id: 3,
-    module: "CS2113T"
-  }
-]
-
 app.get('/', (req, res) => {
   res.send('<h1>TA-lent Connect</h1>')
 })
 
 app.get('/api/listings', (req, res) => {
-  res.json(listings)
+  Listing.find({}).then(listings => {
+    res.json(listings)
+  })
 })
 
-const generateId = () => {
-  const maxId = listings.length > 0
-    ? Math.max(...listings.map(n => n.id))
-    : 0
-  return maxId + 1
-}
 
 app.post('/api/listings', (request, response) => {
   const body = request.body
 
-  if (!body.module) {
-    return response.status(400).json({ 
-      error: 'module missing' 
-    })
+  if (body.module === undefined) {
+    return response.status(400).json({ error: 'content missing' })
   }
 
-  const listing = {
-    module: body.module,
-    id: generateId(),
-  }
+  const listing = new Listing({
+    module: body.module
+  })
 
-  listings = listings.concat(listing)
-
-  response.json(listing)
+  listing.save().then(savedListing => {
+    response.json(savedListing)
+  })
 })
 
 app.get('/api/listings/:id', (request, response) => {
-  const id = Number(request.params.id)
-  const listing = listings.find(listing => listing.id === id)
-
-  if (listing) {
-    response.json(listing)
-  } else {
-    response.status(404).end()
-  }
+  Listing.findById(request.params.id).then(note => {
+    response.json(note)
+  })
 })
 
 app.delete('/api/listings/:id', (request, response) => {
@@ -89,7 +64,7 @@ const unknownEndpoint = (request, response) => {
 
 app.use(unknownEndpoint)
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
