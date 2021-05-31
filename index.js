@@ -18,13 +18,10 @@ const requestLogger = (request, response, next) => {
 
 app.use(requestLogger)
 
-app.get('/', (req, res) => {
-  res.send('<h1>TA-lent Connect</h1>')
-})
 
-app.get('/api/listings', (req, res) => {
+app.get('/api/listings', (request, response) => {
   Listing.find({}).then(listings => {
-    res.json(listings)
+    response.json(listings)
   })
 })
 
