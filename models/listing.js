@@ -13,7 +13,11 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFind
   })
 
 const listingSchema = new mongoose.Schema({
-  module: String
+  module: {
+    type: String,
+    minLength: 6,
+    reuired: true
+  }
 })
 
 listingSchema.set('toJSON', {
