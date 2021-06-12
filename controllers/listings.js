@@ -38,13 +38,6 @@ listingsRouter.post('/', async (request, response, next) => {
 
   const listing = new Listing({
     module: body.module,
-    numberOfOpenings: body.numberOfOpenings,
-    applicationDeadline: body.applicationDeadline,
-    requirements: body.requirements,
-    jobScope: body.jobScope,
-    otherInfo: body.otherInfo,
-    moduleCoordinators: body.moduleCoordinators,
-    contactEmail: body.contactEmail,
     user: user._id
   })
 
@@ -65,14 +58,7 @@ listingsRouter.put('/:id', (request, response, next) => {
   const body = request.body
 
   const listing = {
-    module: body.module,
-    numberOfOpenings: body.numberOfOpenings,
-    applicationDeadline: body.applicationDeadline,
-    requirements: body.requirements,
-    jobScope: body.jobScope,
-    otherInfo: body.otherInfo,
-    moduleCoordinators: body.moduleCoordinators,
-    contactEmail: body.contactEmail
+    module: body.module
   }
 
   Listing.findByIdAndUpdate(request.params.id, listing, { new: true })
