@@ -8,6 +8,8 @@ const userSchema = mongoose.Schema({
   },
   name: String,
   passwordHash: String,
+  email: String,
+  accountType: String,
   listings: [
     {
       type: mongoose.Schema.Types.ObjectId,

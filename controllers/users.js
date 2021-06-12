@@ -12,11 +12,19 @@ usersRouter.post('/', async (request, response) => {
     username: body.username,
     name: body.name,
     passwordHash,
+    email: body.email,
+    accountType: body.accountType,
   })
 
-  const savedUser = await user.save()
+  try {
+    const savedUser = await user.save()
+    response.json(savedUser)
+  } catch (error) {
+    return response.status(400).json({
+      error: 'username already taken'
+    })
+  }
 
-  response.json(savedUser)
 })
 
 usersRouter.get('/', async (request, response) => {
