@@ -6,6 +6,21 @@ const listingSchema = new mongoose.Schema({
     minLength: 6,
     required: true
   },
+  numberOfOpenings: String,
+  applicationDeadline: String,
+  requirements: String,
+  jobScope: [
+    {
+      type: String
+    }
+  ],
+  otherInfo: String,
+  moduleCoordinators: [
+    {
+      type: String
+    }
+  ],
+  contactEmail: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -20,4 +35,6 @@ listingSchema.set('toJSON', {
     }
   })
 
-module.exports = mongoose.model('Listing', listingSchema)
+const Listing = mongoose.model('Listing', listingSchema)
+
+module.exports = Listing
