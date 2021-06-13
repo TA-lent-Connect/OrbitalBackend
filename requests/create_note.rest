@@ -1,6 +1,6 @@
 POST http://localhost:3001/api/listings
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImltYWNlbGxpc3QiLCJpZCI6IjYwYmYzNmNlOTJiNWNkNDM3MDY5ODkzZSIsImlhdCI6MTYyMzE1MDM2MH0.N8Rk4sVsXeniePw69QWommM90uvNXfitl0MIrzZGFaU
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MGM0NTVhYjhiZGNjZjkzYjgxZDk4MTIiLCJpYXQiOjE2MjM0OTM0MDUsImV4cCI6MTYyMzQ5NzAwNX0.rTNqlse3jdECSg3Jj-Cx6Cjm5cK6DQDdi0nAgMvj1uk
 
 {
     "module": "CG1111"
