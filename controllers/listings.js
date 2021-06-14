@@ -38,13 +38,16 @@ listingsRouter.post('/', async (request, response, next) => {
 
   const listing = new Listing({
     module: body.module,
-    numberOfOpenings: body.numberOfOpenings,
-    applicationDeadline: body.applicationDeadline,
-    requirements: body.requirements,
+    acadYear: body.acadYear,
+    semester: body.semester,
+    moduleCoordinator: body.moduleCoordinator,
+    email: body.email,
     jobScope: body.jobScope,
+    numberOfOpenings: body.numberOfOpenings,
+    deadline: body.deadline,
+    requirements: body.requirements,
+    applicationProcess: body.applicationProcess,
     otherInfo: body.otherInfo,
-    moduleCoordinators: body.moduleCoordinators,
-    contactEmail: body.contactEmail,
     user: user._id
   })
 
