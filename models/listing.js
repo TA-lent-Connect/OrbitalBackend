@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const listingSchema = new mongoose.Schema({
   module: String,
+  title: String,
   acadYear: String,
   semester: String,
   moduleCoordinator: String,

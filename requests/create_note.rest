@@ -4,6 +4,7 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkb
 
 {
         "module": "CS2113T",
+        "title": "Software Engineering",
         "acadYear": "AY2021/2022",
         "semester": "2",
         "moduleCoordinators": "Tan Tiow Seng",
