@@ -12,7 +12,7 @@ const getTokenFrom = request => {
 }
 
 listingsRouter.get('/', async (request, response) => {
-  const listings = await Listing.find({}).populate('user', { username: 1, name: 1 })
+  const listings = await Listing.find({}).populate('user', { username: 1, name: 1 }).populate('subscribers')
   response.json(listings.map(listing => listing.toJSON()))
 })
 
