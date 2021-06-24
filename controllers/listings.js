@@ -12,7 +12,7 @@ const getTokenFrom = request => {
 }
 
 listingsRouter.get('/', async (request, response) => {
-  const listings = await Listing.find({}).populate('user', { username: 1, name: 1 }).populate('subscribers')
+  const listings = await Listing.find({}).populate('user', { username: 1, name: 1 })
   response.json(listings.map(listing => listing.toJSON()))
 })
 
@@ -49,7 +49,8 @@ listingsRouter.post('/', async (request, response, next) => {
     requirements: body.requirements,
     applicationProcess: body.applicationProcess,
     otherInfo: body.otherInfo,
-    user: user._id
+    user: user._id,
+    subscribers: body.subscribers,
   })
 
   const savedListing = await listing.save()
@@ -81,6 +82,7 @@ listingsRouter.put('/:id', (request, response, next) => {
     requirements: body.requirements,
     applicationProcess: body.applicationProcess,
     otherInfo: body.otherInfo,
+    subscribers: body.subscribers,
   }
 
   Listing.findByIdAndUpdate(request.params.id, listing, { new: true })

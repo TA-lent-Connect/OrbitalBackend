@@ -18,7 +18,7 @@ usersRouter.post('/', async (request, response) => {
 
   try {
     const savedUser = await user.save()
-    response.json(savedUser)
+    response.json(savedUser.toJSON())
   } catch (error) {
     return response.status(400).json({
       error: 'username already taken'
@@ -32,6 +32,26 @@ usersRouter.get('/', async (request, response) => {
     .find({}).populate('listings').populate('subscriptions')
     
   response.json(users.map(u => u.toJSON()))
+})
+
+usersRouter.put('/:id', (request, response, next) => {
+  const body = request.body
+
+  const user = {
+    username: body.username,
+    name: body.name,
+    passwordHash,
+    email: body.email,
+    accountType: body.accountType,
+    listings: body.listings,
+    subscriptions: body.subscriptions,
+  }
+
+  User.findByIdAndUpdate(request.params.id, user, {new:true})
+    .then(updatedUser => {
+      response.json(updatedUser.toJSON())
+    })
+    .catch(error => next(error))
 })
 
 module.exports = usersRouter

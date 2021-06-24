@@ -19,8 +19,7 @@ const listingSchema = new mongoose.Schema({
   },
   subscribers: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      type: String
     }
   ],
 })
