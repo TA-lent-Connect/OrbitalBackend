@@ -35,6 +35,10 @@ app.get('/signup', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+app.get('/signin', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 app.get('/applications', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
@@ -43,11 +47,18 @@ app.get('/listings', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.get('/modules', function (req, res) {
+app.get('/mymodules/createnewlisting', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+app.get('/mymodules/editlisting', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 app.get('/mymodules', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+app.get('/modules', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 

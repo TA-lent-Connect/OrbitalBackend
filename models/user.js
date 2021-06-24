@@ -16,6 +16,12 @@ const userSchema = mongoose.Schema({
       ref: 'Listing'
     }
   ],
+  subscriptions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Listing'
+    }
+  ],
 })
 
 userSchema.plugin(uniqueValidator)
