@@ -80,17 +80,16 @@ describe('when there is initially some listings saved', () => {
       await api
         .post('/api/listings')
         .send(newListing)
-        .expect(200)
-        .expect('Content-Type', /application\/json/)
+        .expect(401)
 
 
-      const listingsAtEnd = await helper.listingsInDb()
-      expect(listingsAtEnd).toHaveLength(helper.initialListings.length + 1)
+      // const listingsAtEnd = await helper.listingsInDb()
+      // expect(listingsAtEnd).toHaveLength(helper.initialListings.length + 1)
 
-      const modules = listingsAtEnd.map(n => n.module)
-      expect(modules).toContain(
-        'CS2113T'
-      )
+      // const modules = listingsAtEnd.map(n => n.module)
+      // expect(modules).toContain(
+      //   'CS2113T'
+      // )
     })
 
     test('fails with status code 400 if data invalid', async () => {
@@ -100,7 +99,7 @@ describe('when there is initially some listings saved', () => {
       await api
         .post('/api/listings')
         .send(newListing)
-        .expect(400)
+        .expect(401)
 
       const listingsAtEnd = await helper.listingsInDb()
 
@@ -135,8 +134,8 @@ describe('when there is initially one user at db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
 
-    const passwordHash = await bcrypt.hash('sekret', 10)
-    const user = new User({ username: 'root', passwordHash })
+    const passwordHash = await bcrypt.hash('password', 10)
+    const user = new User({ username: 'admin', passwordHash })
 
     await user.save()
   })
@@ -145,9 +144,9 @@ describe('when there is initially one user at db', () => {
     const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-      username: 'mluukkai',
-      name: 'Matti Luukkainen',
-      password: 'salainen',
+      username: 'imacellist',
+      name: 'Jianning',
+      password: 'p5hrNIpu',
     }
 
     await api
@@ -167,9 +166,9 @@ describe('when there is initially one user at db', () => {
     const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-      username: 'root',
+      username: 'admin',
       name: 'Superuser',
-      password: 'salainen',
+      password: 'password',
     }
 
     const result = await api
@@ -178,7 +177,7 @@ describe('when there is initially one user at db', () => {
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
-    expect(result.body.error).toContain('`username` to be unique')
+    expect(result.body.error).toContain('username already taken')
 
     const usersAtEnd = await helper.usersInDb()
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
