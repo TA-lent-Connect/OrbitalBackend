@@ -78,6 +78,10 @@ app.get('/apply/editapplication', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+app.get('/apply', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 
 app.get('/mymodules', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
