@@ -51,6 +51,7 @@ listingsRouter.post('/', async (request, response, next) => {
     otherInfo: body.otherInfo,
     user: user._id,
     subscribers: body.subscribers,
+    fileName: body.fileName,
   })
 
   const savedListing = await listing.save()
@@ -83,6 +84,7 @@ listingsRouter.put('/:id', (request, response, next) => {
     applicationProcess: body.applicationProcess,
     otherInfo: body.otherInfo,
     subscribers: body.subscribers,
+    fileName: body.fileName,
   }
 
   Listing.findByIdAndUpdate(request.params.id, listing, { new: true })

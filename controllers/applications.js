@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const applicationsRouter = require('express').Router()
-const Application = require('../models/listing')
+const Application = require('../models/application')
 const User = require('../models/user')
 
 const getTokenFrom = request => {
@@ -30,6 +30,7 @@ applicationsRouter.get('/:id', async (request, response, next) => {
 applicationsRouter.post('/', async (request, response, next) => {
   const body = request.body
   const token = getTokenFrom(request)
+  console.log({token})
   const decodedToken = jwt.verify(token, process.env.SECRET)
   if (!token || !decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
@@ -44,13 +45,17 @@ applicationsRouter.post('/', async (request, response, next) => {
     moduleCoordinator: body.moduleCoordinator,
     email: body.email,
     user: user._id,
+    major: body.major,
+    studyYear: body.studyYear,
+    otherInfo: body.otherInfo,
+    fileName: body.fileName,
   })
 
   const savedApplication = await application.save()
-  user.applications = user.applications.concat(savedListing._id)
-  await user.save()
+  // user.applications = user.applications.concat(savedApplication._id)
+  // await user.save()
 
-  response.json(savedListing.toJSON())
+  response.json(savedApplication.toJSON())
 })
 
 applicationsRouter.delete('/:id', async (request, response, next) => {
@@ -69,11 +74,15 @@ applicationsRouter.put('/:id', (request, response, next) => {
     semester: body.semester,
     moduleCoordinator: body.moduleCoordinator,
     email: body.email,
+    major: body.major,
+    studyYear: body.studyYear,
+    otherInfo: body.otherInfo,
+    fileName: body.fileName,
   }
 
-  Application.findByIdAndUpdate(request.params.id, listing, { new: true })
-    .then(updatedListing => {
-      response.json(updatedListing.toJSON())
+  Application.findByIdAndUpdate(request.params.id, application, { new: true })
+    .then(updatedApplication => {
+      response.json(updatedApplication.toJSON())
     })
     .catch(error => next(error))
 })

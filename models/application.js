@@ -7,6 +7,10 @@ const applicationSchema = new mongoose.Schema({
   semester: String,
   moduleCoordinator: String,
   email: String,
+  major: String,
+  studyYear: String,
+  otherInfo: String,
+  fileName: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

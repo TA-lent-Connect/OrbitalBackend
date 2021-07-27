@@ -9,8 +9,12 @@ const applicationsRouter = require('./controllers/applications')
 const listingsRouter = require('./controllers/listings')
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
+const uploadsRouter = require('./controllers/uploads')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
+const multer  = require('multer')
+const upload = multer()
+// const fileUpload = require('express-fileupload')
 
 logger.info('connecting to', config.MONGODB_URI)
 
@@ -23,16 +27,24 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
   })
 
 app.use(cors())
-app.use(express.json())
+// app.use(fileUpload())
 
+app.use(express.json({ limit: '200mb' }))
 
+app.use('/api/uploads', uploadsRouter)
 app.use('/api/applications', applicationsRouter)
 app.use('/api/listings', listingsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 
 
+
+
 app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/uploads', upload.single('file'), function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
 
 app.get('/signup', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
@@ -74,6 +86,9 @@ app.get('/mymodules', function (req, res) {
 app.get('/modules', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+
+
 
 
 app.listen(5000);

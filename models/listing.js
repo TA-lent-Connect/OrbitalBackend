@@ -13,6 +13,7 @@ const listingSchema = new mongoose.Schema({
   requirements: String,
   applicationProcess: String,
   otherInfo: String,
+  fileName: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
