@@ -12,7 +12,7 @@ const loginRouter = require('./controllers/login')
 const uploadsRouter = require('./controllers/uploads')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
-const multer  = require('multer')
+const multer = require('multer')
 const upload = multer()
 // const fileUpload = require('express-fileupload')
 

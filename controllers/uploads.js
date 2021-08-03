@@ -4,21 +4,21 @@ const mongodb = require('mongodb')
 const binary = mongodb.Binary
 const fs = require('fs')
 const FileReader = require('filereader')
-const multer  = require('multer')
+const multer = require('multer')
 const multerUpload = multer()
 
 
 uploadsRouter.get('/:id', async (request, response, next) => {
-    const uploads = await Upload.find({});
+  const uploads = await Upload.find({});
 
-    const file = uploads.filter(upload => (upload.name === request.params.id))
+  const file = uploads.filter(upload => (upload.name === request.params.id))
 
-    // var DOWNLOAD_DIR = path.join(process.env.HOME || process.env.USERPROFILE, 'downloads/');
-    // var file_path = path.join(DOWNLOAD_DIR,file.name);
+  // var DOWNLOAD_DIR = path.join(process.env.HOME || process.env.USERPROFILE, 'downloads/');
+  // var file_path = path.join(DOWNLOAD_DIR,file.name);
 
-    fs.writeFileSync(file[0].name, file[0].file);
+  fs.writeFileSync(file[0].name, file[0].file);
 
-    // response.json(file[0].file)
+  // response.json(file[0].file)
 })
 
 uploadsRouter.get('/', async (request, response) => {
@@ -32,59 +32,59 @@ uploadsRouter.post('/', multerUpload.single('file'), async (request, response, n
   console.log(body)
   console.log(request.file)
 
-//   var buffer = {};
+  //   var buffer = {};
 
-        const upload = new Upload({
-            name: body.name,
-            file: request.file.buffer,
-          })
-          const savedUpload = await upload.save()
-          response.json(savedUpload.toJSON())
-
-
-    // var promise = new Promise(getBuffer(request.file));
-    // promise.then(async function(data) {
-    //     const upload = new Upload({
-    //         name: body.name,
-    //         file: data,
-    //       })
-    //       const savedUpload = await upload.save()
-    //       response.json(savedUpload.toJSON())
-    // })
-
-    // function getBuffer(file) {
-    //     return function(resolve) {
-    //     var reader = new FileReader();
-        
-    //     reader.onload = function(e) {
-    //         console.log(e.target.result)
-    //         var arrayBuffer = reader.result;
-    //         buffer = Buffer.from(arrayBuffer, 'base64')
-    //         resolve(buffer)
-    //     }
-    //     reader.readAsArrayBuffer(file);
-    //     }
-    // }
+  const upload = new Upload({
+    name: body.name,
+    file: request.file.buffer,
+  })
+  const savedUpload = await upload.save()
+  response.json(savedUpload.toJSON())
 
 
-    // user.applications = user.applications.concat(savedApplication._id)
-    // await user.save()
-  
+  // var promise = new Promise(getBuffer(request.file));
+  // promise.then(async function(data) {
+  //     const upload = new Upload({
+  //         name: body.name,
+  //         file: data,
+  //       })
+  //       const savedUpload = await upload.save()
+  //       response.json(savedUpload.toJSON())
+  // })
 
-  
+  // function getBuffer(file) {
+  //     return function(resolve) {
+  //     var reader = new FileReader();
 
-// //   const data = await fs.readFile(body.file)
-//   const data = request.file;
-//   const base64 = data.toString('base64');
-//   console.log(base64)
+  //     reader.onload = function(e) {
+  //         console.log(e.target.result)
+  //         var arrayBuffer = reader.result;
+  //         buffer = Buffer.from(arrayBuffer, 'base64')
+  //         resolve(buffer)
+  //     }
+  //     reader.readAsArrayBuffer(file);
+  //     }
+  // }
 
-//   const buffer = Buffer.alloc(base64, 'base64')
 
-    // const buffer = Buffer.from(body.file, 'base64')
+  // user.applications = user.applications.concat(savedApplication._id)
+  // await user.save()
 
-    // const data = fileReader.readAsArrayBuffer(request.file)
 
-    
+
+
+  // //   const data = await fs.readFile(body.file)
+  //   const data = request.file;
+  //   const base64 = data.toString('base64');
+  //   console.log(base64)
+
+  //   const buffer = Buffer.alloc(base64, 'base64')
+
+  // const buffer = Buffer.from(body.file, 'base64')
+
+  // const data = fileReader.readAsArrayBuffer(request.file)
+
+
 
 
 
@@ -144,7 +144,7 @@ module.exports = uploadsRouter
 
 // function insertFile(file, res) {
 //     let collection = db.collection('files')
-    
+
 // }
 
 // function getFiles(res) {
