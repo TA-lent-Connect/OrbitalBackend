@@ -8,7 +8,7 @@ if (process.argv.length < 3) {
 const password = process.argv[2]
 
 const url =
-  `mongodb+srv://Jianning:${password}@orbital.b3mdn.mongodb.net/modulelistings?retryWrites=true&w=majority`
+  `mongodb+srv://Jianning:${password}@orbital.b3mdn.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
