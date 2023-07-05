@@ -3,7 +3,7 @@ const Upload = require('../models/upload')
 const mongodb = require('mongodb')
 const binary = mongodb.Binary
 const fs = require('fs')
-const FileReader = require('filereader')
+//const FileReader = require('filereader')
 const multer = require('multer')
 const multerUpload = multer()
 
